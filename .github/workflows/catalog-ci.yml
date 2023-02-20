@@ -1,0 +1,51 @@
+name: Catalog Service CI
+on:
+  push:
+    paths:
+      - '.github/workflows/catalog-ci.yml'
+      - 'catalog-service/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Print versions
+        run: |
+            echo "JAVA_HOME: $JAVA_HOME"
+            java --version
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Compile the project
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build -x check
+          build-root-directory: catalog-service
+
+      - name: Checks that sourcecode satisfies formatting rules
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: spotlessCheck
+          build-root-directory: catalog-service
+
+      - name: Run the unit tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: test
+          build-root-directory: catalog-service
