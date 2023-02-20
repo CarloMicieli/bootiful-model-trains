@@ -37,17 +37,19 @@ jobs:
       - name: Compile the project
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build -x check
-          build-root-directory: catalog-service
+          arguments: catalog-service:build -x check
 
       - name: Checks that sourcecode satisfies formatting rules
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: spotlessCheck
-          build-root-directory: catalog-service
+          arguments: catalog-service:spotlessCheck
 
       - name: Run the unit tests
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: test
-          build-root-directory: catalog-service
+          arguments: catalog-service:test
+
+      - name: Run the integration tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: catalog-service:integrationTest
