@@ -2,6 +2,13 @@
 
 ## REST API
 
+|   Endpoint	    | Method | Req. body | Status | Resp. body | Description    		                   |
+|:--------------:|:------:|:---------:|:------:|:----------:|:------------------------------------------|
+|  `/brands`     | `POST` |  `Brand`  |  201   |            | Add a new brand to the catalog            |
+| `/brands/{id}` | `PUT`  |   `Brand`   |  204   |            | Update the brand with the given `{id}`    |
+| `/brands/{id}` | `GET`  |            |  200   |  `Brand`   | Get the brand with the given `{id}`       |
+|   `/brands`    | `GET`  |            |  200   | `Brand[]`  | Get all brands in the catalog             |
+
 ## Useful Commands
 
 | Gradle Command	            | Description                                   |
