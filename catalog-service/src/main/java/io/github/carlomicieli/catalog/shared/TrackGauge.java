@@ -18,39 +18,21 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.shared;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum OrganizationEntityType {
-    CIVIL_LAW_PARTNERSHIP("CIVIL_LAW_PARTNERSHIP"),
-
-    ENTREPRENEURIAL_COMPANY("ENTREPRENEURIAL_COMPANY"),
-
-    GLOBAL_PARTNERSHIP("GLOBAL_PARTNERSHIP"),
-
-    LIMITED_COMPANY("LIMITED_COMPANY"),
-
-    LIMITED_PARTNERSHIP("LIMITED_PARTNERSHIP"),
-
-    LIMITED_PARTNERSHIP_LIMITED_COMPANY("LIMITED_PARTNERSHIP_LIMITED_COMPANY"),
-
-    OTHER("OTHER"),
-
-    PUBLIC_INSTITUTION("PUBLIC_INSTITUTION"),
-
-    PUBLIC_LIMITED_COMPANY("PUBLIC_LIMITED_COMPANY"),
-
-    REGISTERED_SOLE_TRADER("REGISTERED_SOLE_TRADER"),
-
-    SOLE_TRADER("SOLE_TRADER"),
-
-    STATE_OWNED_ENTERPRISE("STATE_OWNED_ENTERPRISE");
+public enum TrackGauge {
+    BROAD("BROAD"),
+    MEDIUM("MEDIUM"),
+    MINIMUM("MINIMUM"),
+    NARROW("NARROW"),
+    STANDARD("STANDARD");
 
     private String value;
 
-    OrganizationEntityType(String value) {
+    TrackGauge(String value) {
         this.value = value;
     }
 
@@ -65,8 +47,8 @@ public enum OrganizationEntityType {
     }
 
     @JsonCreator
-    public static OrganizationEntityType fromValue(String value) {
-        for (OrganizationEntityType b : OrganizationEntityType.values()) {
+    public static TrackGauge fromValue(String value) {
+        for (TrackGauge b : TrackGauge.values()) {
             if (b.value.equals(value)) {
                 return b;
             }

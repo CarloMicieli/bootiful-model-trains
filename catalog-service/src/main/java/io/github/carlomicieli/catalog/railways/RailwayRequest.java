@@ -18,7 +18,7 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.railways;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.carlomicieli.catalog.shared.ContactInfo;
@@ -31,14 +31,16 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @RecordBuilder
-public record BrandRequest(
-        @JsonProperty("name") @NotNull @Size(min = 3, max = 50) String name,
-        @JsonProperty("registered_company_name") @Size(max = 100) String registeredCompanyName,
+public record RailwayRequest(
+        @JsonProperty("name") @NotNull @Size(min = 2, max = 25) String name,
+        @JsonProperty("abbreviation") @Size(min = 2, max = 10) String abbreviation,
+        @JsonProperty("registered_company_name") @Size(max = 250) String registeredCompanyName,
         @JsonProperty("organization_entity_type") OrganizationEntityType organizationEntityType,
-        @JsonProperty("group_name") @Size(max = 100) String groupName,
         @JsonProperty("description") @Valid LocalizedText description,
-        @JsonProperty("contact_info") ContactInfo contactInfo,
-        @JsonProperty("address") Address address,
-        @JsonProperty("socials") Socials socials,
-        @JsonProperty("kind") @NotNull @Valid BrandKind kind,
-        @JsonProperty("status") BrandStatus status) {}
+        @JsonProperty("country") @NotNull @Size(min = 2, max = 2) String country,
+        @JsonProperty("period_of_activity") @Valid RailwayPeriodOfActivity periodOfActivity,
+        @JsonProperty("gauge") RailwayGauge gauge,
+        @JsonProperty("headquarters") @Size(max = 250) String headquarters,
+        @JsonProperty("total_length") @Valid RailwayTotalLength totalLength,
+        @JsonProperty("contact_info") @Valid ContactInfo contactInfo,
+        @JsonProperty("socials") @Valid Socials socials) {}

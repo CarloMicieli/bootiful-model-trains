@@ -18,15 +18,8 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.shared;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
+import java.time.Instant;
 
-public record ContactInfo(
-        @JsonProperty("email") @Size(max = 250) @Email String email,
-        @JsonProperty("phone") @Size(max = 20) String phone,
-        @JsonProperty("website_url") @Valid @Size(max = 100) URI websiteUrl) {}
+public record ResourceMetadata(Instant createdDate, Instant lastModifiedDate, Integer version) {}

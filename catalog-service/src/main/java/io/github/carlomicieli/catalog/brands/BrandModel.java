@@ -22,6 +22,11 @@ package io.github.carlomicieli.catalog.brands;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+import io.github.carlomicieli.catalog.shared.ContactInfo;
+import io.github.carlomicieli.catalog.shared.LocalizedText;
+import io.github.carlomicieli.catalog.shared.OrganizationEntityType;
+import io.github.carlomicieli.catalog.shared.ResourceMetadata;
+import io.github.carlomicieli.catalog.shared.Socials;
 import io.github.carlomicieli.catalog.util.Slug;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.RepresentationModel;

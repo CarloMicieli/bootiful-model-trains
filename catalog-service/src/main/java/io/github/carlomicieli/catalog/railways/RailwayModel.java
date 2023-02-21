@@ -18,9 +18,23 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.railways;
 
-import io.github.carlomicieli.catalog.util.Slug;
-import org.springframework.data.repository.CrudRepository;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-public interface BrandRepository extends CrudRepository<Brand, Slug> {}
+import io.github.carlomicieli.catalog.shared.ResourceMetadata;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.RepresentationModel;
+
+public class RailwayModel extends RepresentationModel<RailwayModel> {
+    private final Railway model;
+
+    public RailwayModel(Railway model) {
+        super(linkTo(RailwaysController.class).slash(model.railwayId()).withRel(IanaLinkRelations.SELF));
+        this.model = model;
+    }
+
+    public ResourceMetadata getMetadata() {
+        return new ResourceMetadata(model.createdDate(), model.lastModifiedDate(), model.version());
+    }
+}

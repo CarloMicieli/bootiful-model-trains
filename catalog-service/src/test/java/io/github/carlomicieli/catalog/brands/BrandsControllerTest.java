@@ -51,7 +51,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @DisplayName("Brands controller")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@WebMvcTest({BrandsController.class, CatalogServiceControllerAdvice.class})
+@WebMvcTest({BrandsController.class, BrandsControllerAdvice.class, CatalogServiceControllerAdvice.class})
 @Import({WebConfig.class})
 class BrandsControllerTest {
     private static final Slug FIXED_BRAND_ID = Slug.of("ACME");

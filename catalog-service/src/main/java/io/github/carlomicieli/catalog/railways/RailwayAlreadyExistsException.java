@@ -18,21 +18,20 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.railways;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Map;
-import javax.validation.constraints.Size;
-import org.springframework.data.relational.core.mapping.Column;
+import io.github.carlomicieli.catalog.util.Slug;
 
-public record LocalizedText(
-        @Size(max = 2500) @Column("en") @JsonProperty("en") String englishText,
-        @Size(max = 2500) @Column("it") @JsonProperty("it") String italianText) {
+@SuppressWarnings("serial")
+public class RailwayAlreadyExistsException extends RuntimeException {
+    private final Slug railwayId;
 
-    private static final String ENGLISH = "en";
-    private static final String ITALIAN = "it";
+    public RailwayAlreadyExistsException(Slug railwayId) {
+        super("The railway already exists");
+        this.railwayId = railwayId;
+    }
 
-    public Map<String, String> toMap() {
-        return Map.of(ENGLISH, this.englishText, ITALIAN, this.italianText);
+    public Slug getRailwayId() {
+        return railwayId;
     }
 }

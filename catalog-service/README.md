@@ -2,12 +2,16 @@
 
 ## REST API
 
-|   Endpoint	    | Method | Req. body | Status | Resp. body | Description    		                   |
-|:--------------:|:------:|:---------:|:------:|:----------:|:------------------------------------------|
-|  `/brands`     | `POST` |  `Brand`  |  201   |            | Add a new brand to the catalog            |
-| `/brands/{id}` | `PUT`  |   `Brand`   |  204   |            | Update the brand with the given `{id}`    |
-| `/brands/{id}` | `GET`  |            |  200   |  `Brand`   | Get the brand with the given `{id}`       |
-|   `/brands`    | `GET`  |            |  200   | `Brand[]`  | Get all brands in the catalog             |
+|   Endpoint	    | Method | Req. body | Status | Resp. body | Description    		                      |
+|:--------------:|:------:|:---------:|:------:|:----------:|:---------------------------------------|
+|   `/brands`    | `POST` |  `Brand`  |  201   |            | Add a new brand to the catalog         |
+| `/brands/{id}` | `PUT`  |  `Brand`  |  204   |            | Update the brand with the given `{id}` |
+| `/brands/{id}` | `GET`  |           |  200   |  `Brand`   | Get the brand with the given `{id}`    |
+|   `/brands`    | `GET`  |           |  200   | `Brand[]`  | Get all brands in the catalog          |
+|  `/railways`   | `POST` | `Railway` |  201   |            | Add a new railway to the catalog       |
+| `/railways/{id}` | `PUT`  |  `Railway`  |  204   |            | Update the railway with the given `{id}` |
+| `/railways/{id}` | `GET`  |           |  200   |  `Railway`   | Get the railway with the given `{id}`    |
+|   `/railways`    | `GET`  |           |  200   | `Railway[]`  | Get all railway in the catalog          |
 
 ## Useful Commands
 

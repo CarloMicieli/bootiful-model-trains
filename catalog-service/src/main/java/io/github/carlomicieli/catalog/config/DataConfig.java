@@ -20,7 +20,8 @@
  */
 package io.github.carlomicieli.catalog.config;
 
-import io.github.carlomicieli.catalog.brands.BrandRepository;
+import io.github.carlomicieli.catalog.brands.BrandsRepository;
+import io.github.carlomicieli.catalog.railways.RailwaysRepository;
 import io.github.carlomicieli.catalog.util.Slug;
 import jakarta.annotation.Nonnull;
 import java.net.URI;
@@ -35,7 +36,7 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJdbcRepositories(basePackageClasses = {BrandRepository.class})
+@EnableJdbcRepositories(basePackageClasses = {BrandsRepository.class, RailwaysRepository.class})
 @EnableJdbcAuditing
 @EnableTransactionManagement
 public class DataConfig extends AbstractJdbcConfiguration {

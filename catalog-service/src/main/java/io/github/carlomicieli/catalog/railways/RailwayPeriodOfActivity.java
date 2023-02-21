@@ -18,16 +18,13 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.railways;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
-import java.net.URI;
+import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public record Socials(
-        @JsonProperty("facebook") @Valid @Size(min = 3, max = 100) URI facebook,
-        @JsonProperty("instagram") @Valid @Size(min = 3, max = 100) URI instagram,
-        @JsonProperty("linkedin") @Valid @Size(min = 3, max = 100) URI linkedin,
-        @JsonProperty("twitter") @Valid @Size(min = 3, max = 100) URI twitter,
-        @JsonProperty("youtube") @Valid @Size(min = 3, max = 100) URI youtube) {}
+public record RailwayPeriodOfActivity(
+        @JsonProperty("operating_since") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate operatingSince,
+        @JsonProperty("operating_until") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate operatingUntil,
+        @JsonProperty("status") RailwayStatus status) {}

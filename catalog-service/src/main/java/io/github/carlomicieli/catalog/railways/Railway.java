@@ -18,11 +18,11 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.railways;
 
 import static org.springframework.data.relational.core.mapping.Embedded.OnEmpty.USE_NULL;
 
-import io.github.carlomicieli.catalog.shared.ContactInfo;
+import io.github.carlomicieli.catalog.brands.Address;
 import io.github.carlomicieli.catalog.shared.LocalizedText;
 import io.github.carlomicieli.catalog.shared.OrganizationEntityType;
 import io.github.carlomicieli.catalog.shared.Socials;
@@ -36,20 +36,22 @@ import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("brands")
+@Table("railways")
 @RecordBuilder
-public record Brand(
-        @Id Slug brandId,
+public record Railway(
+        @Id Slug railwayId,
         String name,
+        String abbreviation,
         String registeredCompanyName,
         OrganizationEntityType organizationEntityType,
-        String groupName,
         @Embedded(onEmpty = USE_NULL, prefix = "description_") LocalizedText description,
-        @Embedded(onEmpty = USE_NULL, prefix = "contact_") ContactInfo contactInfo,
+        String country,
+        @Embedded(onEmpty = USE_NULL) RailwayPeriodOfActivity periodOfActivity,
+        @Embedded(onEmpty = USE_NULL) RailwayGauge gauge,
+        String headquarters,
+        @Embedded(onEmpty = USE_NULL, prefix = "total_length_") RailwayTotalLength totalLength,
         @Embedded(onEmpty = USE_NULL, prefix = "address_") Address address,
         @Embedded(onEmpty = USE_NULL, prefix = "socials_") Socials socials,
-        BrandKind kind,
-        BrandStatus status,
         @CreatedDate Instant createdDate,
         @LastModifiedDate Instant lastModifiedDate,
         @Version Integer version) {}

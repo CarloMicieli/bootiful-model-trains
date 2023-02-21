@@ -18,8 +18,20 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
+package io.github.carlomicieli.catalog.railways;
 
-import java.time.Instant;
+import io.github.carlomicieli.catalog.util.Slug;
 
-public record ResourceMetadata(Instant createdDate, Instant lastModifiedDate, Integer version) {}
+@SuppressWarnings("serial")
+public class RailwayNotFoundException extends RuntimeException {
+    private final Slug railwayId;
+
+    public RailwayNotFoundException(Slug railwayId) {
+        super("The railway doesn't exist");
+        this.railwayId = railwayId;
+    }
+
+    public Slug getRailwayId() {
+        return railwayId;
+    }
+}

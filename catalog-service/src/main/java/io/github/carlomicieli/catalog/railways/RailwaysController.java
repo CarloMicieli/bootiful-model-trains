@@ -18,66 +18,48 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.brands;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+package io.github.carlomicieli.catalog.railways;
 
 import io.github.carlomicieli.catalog.util.Slug;
 import jakarta.validation.Valid;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/brands")
-public class BrandsController {
+@RequestMapping("/railways")
+public class RailwaysController {
+    private final RailwaysService railwaysService;
 
-    private final BrandsService brandsService;
-
-    public BrandsController(BrandsService brandsService) {
-        this.brandsService = brandsService;
+    public RailwaysController(RailwaysService railwaysService) {
+        this.railwaysService = railwaysService;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<Void> postBrands(@Valid @RequestBody BrandRequest request) {
-        var brandSlug = brandsService.createBrand(request);
-        return ResponseEntity.created(
-                        linkTo(BrandsController.class).slash(brandSlug).toUri())
-                .build();
+    void postRailway(@Valid @RequestBody RailwayRequest request) {
+        throw new UnsupportedOperationException("TODO");
     }
 
-    @PutMapping("/{brandId}")
+    @PostMapping("/{railwayId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void putBrands(@PathVariable Slug brandId, @Valid @RequestBody BrandRequest request) {
-        brandsService.updateBrand(brandId, request);
+    void putRailway(@PathVariable Slug railwayId, @Valid @RequestBody RailwayRequest request) {
+        throw new UnsupportedOperationException("TODO");
     }
 
-    @GetMapping("/{brandId}")
-    @ResponseStatus(HttpStatus.OK)
-    BrandModel getBrandById(@PathVariable Slug brandId) {
-        return brandsService
-                .getBrandById(brandId)
-                .map(BrandModel::new)
-                .orElseThrow(() -> new BrandNotFoundException(brandId));
+    @GetMapping("/{railwayId}")
+    RailwayModel getRailwayById(@PathVariable Slug railwayId) {
+        throw new UnsupportedOperationException("TODO");
     }
 
-    @GetMapping()
-    @ResponseStatus(HttpStatus.OK)
-    CollectionModel<BrandModel> getBrands() {
-        var brands = StreamSupport.stream(brandsService.getBrands().spliterator(), false)
-                .map(BrandModel::new)
-                .collect(Collectors.toList());
-        return CollectionModel.of(brands);
+    @GetMapping
+    CollectionModel<RailwayModel> getAllRailways() {
+        throw new UnsupportedOperationException("TODO");
     }
 }

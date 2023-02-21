@@ -27,28 +27,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class BrandsService {
 
-    private final BrandRepository brandRepository;
+    private final BrandsRepository brandsRepository;
 
-    public BrandsService(BrandRepository brandRepository) {
-        this.brandRepository = brandRepository;
+    public BrandsService(BrandsRepository brandsRepository) {
+        this.brandsRepository = brandsRepository;
     }
 
     public Slug createBrand(BrandRequest request) {
         var newBrand = brandFromRequest(request, null);
-        if (brandRepository.existsById(newBrand.brandId())) {
+        if (brandsRepository.existsById(newBrand.brandId())) {
             throw new BrandAlreadyExistsException(newBrand.brandId());
         }
-        brandRepository.save(newBrand);
+        brandsRepository.save(newBrand);
         return newBrand.brandId();
     }
 
     public void updateBrand(Slug brandId, BrandRequest request) {
-        var entity = brandRepository
+        var entity = brandsRepository
                 .findById(brandId)
                 .map(existingBrand -> brandFromRequest(request, existingBrand))
                 .orElseGet(() -> brandFromRequest(request, null));
 
-        brandRepository.save(entity);
+        brandsRepository.save(entity);
     }
 
     Brand brandFromRequest(BrandRequest request, Brand brand) {
@@ -74,10 +74,10 @@ public class BrandsService {
     }
 
     public Optional<Brand> getBrandById(Slug brandId) {
-        return brandRepository.findById(brandId);
+        return brandsRepository.findById(brandId);
     }
 
     public Iterable<Brand> getBrands() {
-        return brandRepository.findAll();
+        return brandsRepository.findAll();
     }
 }
