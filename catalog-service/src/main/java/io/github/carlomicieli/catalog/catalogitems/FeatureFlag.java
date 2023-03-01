@@ -18,15 +18,41 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.util;
+package io.github.carlomicieli.catalog.catalogitems;
 
-/**
- * Exception thrown when a value cannot be converted to a {@code Slug}. Examples include {@code
- * null} or an empty {@code String}.
- */
-@SuppressWarnings("serial")
-public final class InvalidSlugException extends RuntimeException {
-    public InvalidSlugException() {
-        super("Slug: input cannot be null or empty");
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+public enum FeatureFlag {
+    TRUE("true"),
+
+    FALSE("false"),
+
+    NOT_APPLICABLE("NOT_APPLICABLE");
+
+    private String value;
+
+    FeatureFlag(String value) {
+        this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static FeatureFlag fromValue(String value) {
+        for (FeatureFlag b : FeatureFlag.values()) {
+            if (b.value.equals(value)) {
+                return b;
+            }
+        }
+        throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 }

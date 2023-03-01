@@ -18,15 +18,15 @@
  *    specific language governing permissions and limitations
  *    under the License.
  */
-package io.github.carlomicieli.catalog.util;
+package io.github.carlomicieli.catalog.catalogitems;
 
-/**
- * Exception thrown when a value cannot be converted to a {@code Slug}. Examples include {@code
- * null} or an empty {@code String}.
- */
-@SuppressWarnings("serial")
-public final class InvalidSlugException extends RuntimeException {
-    public InvalidSlugException() {
-        super("Slug: input cannot be null or empty");
-    }
-}
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record TechnicalSpecifications(
+        @JsonProperty("minimum_radius") Float minimumRadius,
+        @JsonProperty("coupling") Coupling coupling,
+        @JsonProperty("flywheel_fitted") FeatureFlag flywheelFitted,
+        @JsonProperty("metal_body") FeatureFlag metalBody,
+        @JsonProperty("interior_lights") FeatureFlag interiorLights,
+        @JsonProperty("lights") FeatureFlag lights,
+        @JsonProperty("spring_buffers") FeatureFlag springBuffers) {}
