@@ -21,5 +21,8 @@
 package io.github.carlomicieli.catalog.catalogitems;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.DecimalMin;
 
-public record LengthOverBuffers(@JsonProperty("inches") Float inches, @JsonProperty("millimeters") Float millimeters) {}
+public record LengthOverBuffers(
+        @DecimalMin("0.1") @JsonProperty("inches") Float inches,
+        @DecimalMin("0.1") @JsonProperty("millimeters") Float millimeters) {}

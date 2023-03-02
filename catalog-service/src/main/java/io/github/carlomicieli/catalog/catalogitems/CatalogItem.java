@@ -20,39 +20,18 @@
  */
 package io.github.carlomicieli.catalog.catalogitems;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.github.carlomicieli.catalog.shared.LocalizedText;
+import jakarta.validation.Valid;
 
-public enum FeatureFlag {
-    YES("yes"),
-
-    NO("no"),
-
-    NOT_APPLICABLE("NOT_APPLICABLE");
-
-    private String value;
-
-    FeatureFlag(String value) {
-        this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static FeatureFlag fromValue(String value) {
-        for (FeatureFlag b : FeatureFlag.values()) {
-            if (b.value.equals(value)) {
-                return b;
-            }
-        }
-        throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-}
+public record CatalogItem(
+        @JsonProperty("catalog_item_id") String catalogItemId,
+        @JsonProperty("brand") String brand,
+        @JsonProperty("item_number") String itemNumber,
+        @JsonProperty("scale") String scale,
+        @JsonProperty("category") CatalogItemCategory category,
+        @JsonProperty("description") @Valid LocalizedText description,
+        @JsonProperty("details") @Valid LocalizedText details,
+        @JsonProperty("power_method") PowerMethod powerMethod,
+        @JsonProperty("delivery_date") String deliveryDate,
+        @JsonProperty("availability_status") AvailabilityStatus availabilityStatus) {}
